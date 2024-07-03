@@ -2,12 +2,14 @@ for (var i=0; i<document.querySelectorAll(".drum").length; i++) {
 
 // detecting button click press
 
-(document.querySelectorAll(".drum")[i].addEventListener("click", handleClick));
+document.querySelectorAll(".drum")[i].addEventListener("click", handleClick);
 
 function handleClick() {
     var buttonInnerHTML = this.innerHTML;
 
    makeSound(buttonInnerHTML);
+
+   buttonAnimation(buttonInnerHTML);
     }
 }
 
@@ -16,6 +18,7 @@ function handleClick() {
 document.addEventListener("keydown", function(event) {
 
     makeSound(event.key);
+    buttonAnimation(event.key);
 });
 
 // function for making sound for the specific key or click press
@@ -62,4 +65,12 @@ function makeSound(key) {
             break;
 
 }
+}
+
+function buttonAnimation(currentKey) {
+    var activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function() {
+        activeButton.classList.remove("pressed");
+    }, 150);
 }
